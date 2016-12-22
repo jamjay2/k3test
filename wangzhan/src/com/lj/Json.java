@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,7 @@ import org.eclipse.jdt.internal.compiler.batch.Main;
 import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-
+@WebServlet("/json")
 public class Json extends HttpServlet{
 	
 	@Override
@@ -35,30 +36,30 @@ public class Json extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String type = 	req.getParameter("type");
-		System.out.println("type"+type);
+		String type = req.getParameter("type");
+		System.out.println("type" + type);
 		if (type.equals("dd")) {
 			JSONObject json = new JSONObject();
-			  Map map = new HashMap<>();
-			  map.put("Mobile", "dddd");
-			  map.put("Name", "ManojSarnaik");
-			    // put some value pairs into the JSON object .
+			Map map = new HashMap<>();
+			map.put("Mobile", "dddd");
+			map.put("Name", "ManojSarnaik");
+			// put some value pairs into the JSON object .
 			  
-			  List list  = new ArrayList<>();
-			  list.add("d");
+			List list = new ArrayList<>();
+			list.add("d");
+
+			JSONArray jsonMembers = new JSONArray();
+			//变量对象
+			JSONObject member1 = new JSONObject();
+			member1.put("itemid", "zhangfan");
+			member1.put("productid", "userpass");
+			member1.put("email", "10371443@qq.com");
+			member1.put("sign_date", "2007-06-12");
+			jsonMembers.add(member1);
 			  
-			  
-			    JSONArray jsonMembers = new JSONArray();  
-			    JSONObject member1 = new JSONObject();  
-			    member1.put("itemid", "zhangfan");  
-			    member1.put("productid", "userpass");  
-			    member1.put("email","10371443@qq.com");  
-			    member1.put("sign_date", "2007-06-12");  
-			    jsonMembers.add(member1);
-			  
-			  
-			  json.put("total", 1);
-			   json.put("rows", jsonMembers);
+			//json对象
+			json.put("total", 1);
+			json.put("rows", jsonMembers);
 			   	
 		        
 		        
